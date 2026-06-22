@@ -76,6 +76,26 @@ export class YOLOUtils {
         return LabelUtil.createLabelRect(labelId, rect);
     }
 
+    public static extractMaxLabelIndexFromAnnotations(rawAnnotations: string[]): number {
+        let maxIndex = -1;
+        for (const rawAnnotation of rawAnnotations) {
+            rawAnnotation.split(/[\r\n]/).filter(Boolean).forEach((line: string) => {
+                const parts = line.split(' ');
+                if (parts.length >= 1) {
+                    const idx = parseInt(parts[0]);
+                    if (!isNaN(idx) && idx >= 0 && idx > maxIndex) {
+                        maxIndex = idx;
+                    }
+                }
+            });
+        }
+        return maxIndex;
+    }
+
+    public static generateNumericLabelNames(count: number): LabelName[] {
+        return Array.from({length: count}, (_, i) => LabelUtil.createLabelName(String(i)));
+    }
+
     public static validateYOLOAnnotationComponents(components: string[], labelNamesCount: number): boolean {
         const validateCoordinateValue = (rawValue: string): boolean => {
             const floatValue: number = Number(rawValue);
