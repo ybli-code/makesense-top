@@ -17,6 +17,7 @@ import {PopupWindowType} from '../../../../data/enums/PopupWindowType';
 import {updateActivePopupType} from '../../../../store/general/actionCreators';
 import {truncate} from 'lodash';
 import { Settings } from '../../../../settings/Settings';
+import i18n from '../../../../i18n/config';
 
 interface IProps {
     size: ISize;
@@ -193,7 +194,7 @@ class LabelInputField extends React.Component<IProps, IState> {
                                  ref={ref => this.dropdownLabel = ref}
                                  onClick={this.openDropdown}
                             >
-                                {value ? truncate(value.name, {length: Settings.MAX_DROPDOWN_OPTION_LENGTH}) : 'Select label'}
+                                {value ? truncate(value.name, {length: Settings.MAX_DROPDOWN_OPTION_LENGTH}) : i18n.t('labels.selectLabel')}
                             </div>
                             {this.state.isOpen && <div
                                 className='Dropdown'

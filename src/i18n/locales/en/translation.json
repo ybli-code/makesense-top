@@ -176,7 +176,13 @@
         "roboflowModel": "roboflow model",
         "roboflowApiKey": "roboflow api key",
         "connect": "Connect",
-        "roboflowMessage": "Provide details of the Roboflow model you want to run over tha API, as well as your API key."
+        "roboflowMessage": "Provide details of the Roboflow model you want to run over tha API, as well as your API key.",
+        "loadYOLOv5": "Load YOLOv5 model",
+        "yoloUploadMessage": "Drag and drop your own YOLOv5 model converted to tensorflow.js format and speed up annotation process. Make sure to upload all required files: model.json, model shards as well as .txt containing list of detected classes names.",
+        "yoloDownloadMessage": "Use one of ours pretrained YOLOv5 models to speed up annotation process.",
+        "yoloV5nCOCO": "YOLOv5-nano COCO",
+        "yoloV5sCOCO": "YOLOv5-small COCO",
+        "yoloV5mCOCO": "YOLOv5-medium COCO"
     },
     "project": {
         "exitProject": "Exit project",
@@ -263,5 +269,30 @@
         "vggJson": "Single file in VGG JSON format.",
         "cocoJson": "Single file in COCO JSON format.",
         "jsonSingle": "Single JSON file."
+    },
+    "mobile": {
+        "notSupported": "Due to the small size of the screen we do not support our editor on mobile devices. Check what you missed and visit us from a desktop."
+    },
+    "notifications": {
+        "emptyLabelNameHeader": "Empty label name",
+        "emptyLabelNameDesc": "Looks like you didn't assign name to one of your labels. Unfortunately it is mandatory for every label to have unique name value. Insert correct name or delete empty label and try again.",
+        "nonUniqueLabelNamesHeader": "Non unique label names",
+        "nonUniqueLabelNamesDesc": "Looks like not all your label names are unique. Unique names are necessary to guarantee correct data export when you complete your work. Make your names unique and try again.",
+        "modelDownloadErrorHeader": "Model could not be downloaded",
+        "modelDownloadErrorDesc": "Looks like we were unable to download tensorflow.js model from external server. Make sure that you are connected to internet and try again.",
+        "modelInferenceErrorHeader": "Inference failed",
+        "modelInferenceErrorDesc": "Looks like we were unable to run inference of your image. Please help us improve Make Sense and let us know.",
+        "modelLoadErrorHeader": "Model could not be loaded",
+        "modelLoadErrorDesc": "Looks like we were unable to load your tensorflow.js model from uploaded files. Make sure that you uploaded all model shard files. Please re-upload all model files once again.",
+        "labelsFileUploadErrorHeader": "Labels file was not uploaded",
+        "labelsFileUploadErrorDesc": "Looks like you forgot to upload text file containing list of detected classes names. We need it to map YOLOv5 model output to labels. Please re-upload all model files once again.",
+        "annotationFileParseErrorHeader": "Annotation files could not be parsed",
+        "annotationFileParseErrorDesc": "The contents of an annotation file is not valid JSON, CSV, or XML. Please fix the files selected to import and try again.",
+        "annotationImportAssertionErrorHeader": "Annotation files did not contain valid data",
+        "annotationImportAssertionErrorDesc": "Missing or invalid annotations provided during import. Please fix the files selected to import and try again.",
+        "unsupportedInferenceServerHeader": "Selected inference server is not yet supported",
+        "unsupportedInferenceServerDesc": "Integration with selected inference server is still under construction. Stay tuned for more updates on our GitHub.",
+        "roboflowConnectionFailedHeader": "Roboflow connection failed",
+        "roboflowConnectionFailedDesc": "Looks like we were unable to connect to your Roboflow model. Please, make sure that the model specification and Roboflow API key, are correct."
     }
 }

@@ -176,7 +176,13 @@
         "roboflowModel": "roboflow 模型",
         "roboflowApiKey": "roboflow api 密钥",
         "connect": "连接",
-        "roboflowMessage": "提供您想要通过 API 运行的 Roboflow 模型的详细信息，以及您的 API 密钥。"
+        "roboflowMessage": "提供您想要通过 API 运行的 Roboflow 模型的详细信息，以及您的 API 密钥。",
+        "loadYOLOv5": "加载 YOLOv5 模型",
+        "yoloUploadMessage": "拖放您转换为 tensorflow.js 格式的 YOLOv5 模型并加速标注过程。确保上传所有必需的文件：model.json、模型分片文件以及包含检测类别名称列表的 .txt 文件。",
+        "yoloDownloadMessage": "使用我们预训练的 YOLOv5 模型来加速标注过程。",
+        "yoloV5nCOCO": "YOLOv5-nano COCO",
+        "yoloV5sCOCO": "YOLOv5-small COCO",
+        "yoloV5mCOCO": "YOLOv5-medium COCO"
     },
     "project": {
         "exitProject": "退出项目",
@@ -263,5 +269,30 @@
         "vggJson": "单个 VGG JSON 格式文件。",
         "cocoJson": "单个 COCO JSON 格式文件。",
         "jsonSingle": "单个 JSON 文件。"
+    },
+    "mobile": {
+        "notSupported": "由于屏幕尺寸较小，我们不支持在移动设备上使用编辑器。查看您错过的内容，并从桌面端访问我们。"
+    },
+    "notifications": {
+        "emptyLabelNameHeader": "标签名称为空",
+        "emptyLabelNameDesc": "看起来您没有为某个标签分配名称。遗憾的是，每个标签都必须有唯一的名称。请插入正确的名称或删除空标签后重试。",
+        "nonUniqueLabelNamesHeader": "标签名称不唯一",
+        "nonUniqueLabelNamesDesc": "看起来并非所有标签名称都是唯一的。唯一名称对于保证完成工作后正确导出数据是必要的。请使名称唯一后重试。",
+        "modelDownloadErrorHeader": "模型下载失败",
+        "modelDownloadErrorDesc": "看起来我们无法从外部服务器下载 tensorflow.js 模型。请确保您已连接到互联网，然后重试。",
+        "modelInferenceErrorHeader": "推理失败",
+        "modelInferenceErrorDesc": "看起来我们无法对您的图片进行推理。请帮助我们改进 Make Sense 并告知我们。",
+        "modelLoadErrorHeader": "模型加载失败",
+        "modelLoadErrorDesc": "看起来我们无法从上传的文件中加载您的 tensorflow.js 模型。请确保您上传了所有模型分片文件，然后重新上传所有模型文件。",
+        "labelsFileUploadErrorHeader": "标签文件未上传",
+        "labelsFileUploadErrorDesc": "看起来您忘记上传包含检测类别名称列表的文本文件。我们需要它来将 YOLOv5 模型输出映射到标签。请重新上传所有模型文件。",
+        "annotationFileParseErrorHeader": "标注文件解析失败",
+        "annotationFileParseErrorDesc": "标注文件的内容不是有效的 JSON、CSV 或 XML。请修复所选导入文件后重试。",
+        "annotationImportAssertionErrorHeader": "标注文件数据无效",
+        "annotationImportAssertionErrorDesc": "导入时提供的标注数据缺失或无效。请修复所选导入文件后重试。",
+        "unsupportedInferenceServerHeader": "所选推理服务器尚不支持",
+        "unsupportedInferenceServerDesc": "与所选推理服务器的集成仍在建设中。请关注我们 GitHub 上的更多更新。",
+        "roboflowConnectionFailedHeader": "Roboflow 连接失败",
+        "roboflowConnectionFailedDesc": "看起来我们无法连接到您的 Roboflow 模型。请确保模型规格和 Roboflow API 密钥正确无误。"
     }
 }

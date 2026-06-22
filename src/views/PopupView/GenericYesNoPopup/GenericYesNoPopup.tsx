@@ -32,6 +32,8 @@ export const GenericYesNoPopup: React.FC<IProps> = (
         disableRejectButton
     }) => {
 
+    const { t } = useTranslation();
+
     const [status, setMountStatus] = useState(false);
     useEffect(() => {
         if (!status) {
@@ -50,13 +52,13 @@ export const GenericYesNoPopup: React.FC<IProps> = (
             </div>
             <div className='Footer'>
                 {!skipRejectButton && <TextButton
-                    label={rejectLabel ? rejectLabel : 'NO, THANKS'}
+                    label={rejectLabel ? rejectLabel : t('common.no')}
                     onClick={onReject}
                     externalClassName={'reject'}
                     isDisabled={disableRejectButton}
                 />}
                 {!skipAcceptButton && <TextButton
-                    label={acceptLabel ? acceptLabel : 'YES'}
+                    label={acceptLabel ? acceptLabel : t('common.yes')}
                     onClick={onAccept}
                     externalClassName={'accept'}
                     isDisabled={disableAcceptButton}
