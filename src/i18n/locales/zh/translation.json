@@ -92,7 +92,22 @@
         "suggestLabels": "建议标签",
         "loadYOLOv5ModelMenu": "加载 YOLOv5 模型",
         "reportBug": "报告问题",
-        "about": "关于"
+        "about": "关于",
+        "actions": "操作",
+        "community": "社区",
+        "importImages": "导入图片",
+        "runAiLocally": "本地运行 AI",
+        "connectAiServer": "连接 AI 服务器",
+        "documentation": "文档",
+        "bugsAndFeatures": "问题与功能建议",
+        "editLabelsDescription": "修改标签列表",
+        "importImagesDescription": "加载更多图片",
+        "importAnnotationsDescription": "从文件导入标注",
+        "exportAnnotationsDescription": "导出标注到文件",
+        "runAiLocallyDescription": "在浏览器中运行标注模型",
+        "connectAiServerDescription": "在服务器上运行标注模型",
+        "documentationDescription": "了解更多 Make Sense 信息",
+        "bugsAndFeaturesDescription": "报告问题或提出新功能建议"
     },
     "labels": {
         "noLabelsBefore": "让我们开始吧！",

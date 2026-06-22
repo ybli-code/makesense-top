@@ -92,7 +92,22 @@
         "suggestLabels": "Suggest Labels",
         "loadYOLOv5ModelMenu": "Load YOLOv5 Model",
         "reportBug": "Report Bug",
-        "about": "About"
+        "about": "About",
+        "actions": "Actions",
+        "community": "Community",
+        "importImages": "Import Images",
+        "runAiLocally": "Run AI Locally",
+        "connectAiServer": "Connect AI Server",
+        "documentation": "Documentation",
+        "bugsAndFeatures": "Bugs and Features",
+        "editLabelsDescription": "Modify labels list",
+        "importImagesDescription": "Load more images",
+        "importAnnotationsDescription": "Import annotations from file",
+        "exportAnnotationsDescription": "Export annotations to file",
+        "runAiLocallyDescription": "Run annotation model in browser",
+        "connectAiServerDescription": "Run annotation model on server",
+        "documentationDescription": "Read more about Make Sense",
+        "bugsAndFeaturesDescription": "Report a bug or propose a new feature"
     },
     "labels": {
         "noLabelsBefore": "Let's start!",
