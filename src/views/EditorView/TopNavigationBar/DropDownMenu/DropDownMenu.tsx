@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import classNames from 'classnames'
 import './DropDownMenu.scss';
-import {DropDownMenuData, DropDownMenuNode} from '../../../../data/info/DropDownMenuData';
+import {getDropDownMenuData, DropDownMenuNode} from '../../../../data/info/DropDownMenuData';
 import {EventType} from '../../../../data/enums/EventType';
 import {updatePreventCustomCursorStatus} from '../../../../store/general/actionCreators';
 import {AppState} from '../../../../store';
 import {connect} from 'react-redux';
+import {useTranslation} from 'react-i18next';
 
 interface IProps {
     updatePreventCustomCursorStatusAction: (preventCustomCursor: boolean) => any;
@@ -13,6 +14,8 @@ interface IProps {
 
 const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction}) => {
     const topAnchor = 35;
+    const {t} = useTranslation();
+    const dropDownMenuData = getDropDownMenuData();
 
     const [activeTabIdx, setActiveTabIdx] = useState(null);
     const [activeDropDownAnchor, setDropDownAnchor] = useState(null);
@@ -69,7 +72,7 @@ const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction})
     }
 
     const getDropDownContent = () => {
-        return DropDownMenuData.map((data: DropDownMenuNode, index: number) => getDropDownTab(data, index))
+        return dropDownMenuData.map((data: DropDownMenuNode, index: number) => getDropDownTab(data, index))
     }
 
     const wrapOnClick = (onClick?: () => void, disabled?: boolean): () => void => {
@@ -94,7 +97,7 @@ const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction})
                 src={data.imageSrc}
                 alt={data.imageAlt}
             />
-            {data.name}
+            {t(data.nameKey)}
         </div>
     }
 
@@ -118,7 +121,7 @@ const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction})
                     >
                         <div className='Marker'/>
                         <img src={element.imageSrc} alt={element.imageAlt}/>
-                        {element.name}
+                        {t(element.nameKey)}
                     </div>})}
             </div>
         } else {
@@ -129,7 +132,7 @@ const DropDownMenu: React.FC<IProps> = ({updatePreventCustomCursorStatusAction})
     return(<div className='DropDownMenuWrapper'>
         <>
             {getDropDownContent()}
-            {getDropDownWindow(DropDownMenuData[activeTabIdx])}
+            {getDropDownWindow(dropDownMenuData[activeTabIdx])}
         </>
     </div>)
 }
