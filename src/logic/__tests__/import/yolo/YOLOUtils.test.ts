@@ -165,6 +165,39 @@ describe('YOLOUtils validateYOLOAnnotationComponents method', () => {
         // then
         expect(result).toBe(true);
     });
+
+    it('should return true for valid segmentation format with 3 polygon points', () => {
+        // given
+        const components: string[] = ['0', '0.1', '0.2', '0.5', '0.8', '0.9', '0.3'];
+
+        // when
+        const result = YOLOUtils.validateYOLOAnnotationComponents(components, 1);
+
+        // then
+        expect(result).toBe(true);
+    });
+
+    it('should return false for segmentation format with odd coordinate count', () => {
+        // given
+        const components: string[] = ['0', '0.1', '0.2', '0.5', '0.8', '0.9'];
+
+        // when
+        const result = YOLOUtils.validateYOLOAnnotationComponents(components, 1);
+
+        // then
+        expect(result).toBe(false);
+    });
+
+    it('should return false for segmentation format with invalid coordinate value', () => {
+        // given
+        const components: string[] = ['0', '0.1', '0.2', '1.5', '0.8', '0.9', '0.3'];
+
+        // when
+        const result = YOLOUtils.validateYOLOAnnotationComponents(components, 1);
+
+        // then
+        expect(result).toBe(false);
+    });
 });
 
 describe('YOLOUtils parseYOLOAnnotationFromString method', () => {
@@ -232,6 +265,33 @@ describe('YOLOUtils parseYOLOAnnotationFromString method', () => {
             return YOLOUtils.parseYOLOAnnotationFromString(rawAnnotation, labelNames, imageSize, imageName);
         }
         expect(wrapper).toThrowError(new AnnotationsParsingError(imageName));
+    });
+
+    it('should convert segmentation polygon to circumscribed bbox', () => {
+        // given: triangle with vertices (0.1,0.2), (0.5,0.8), (0.9,0.3)
+        const rawAnnotation: string = '0 0.1 0.2 0.5 0.8 0.9 0.3';
+        const labelId: string = uuidv4();
+        const labelNames: LabelName[] = [
+            {
+                id: labelId,
+                name: 'orange',
+                color: '#000000'
+            }
+        ];
+        const imageSize: ISize = { width: 1000, height: 1000 };
+        const imageName: string = '0000.png';
+
+        // when
+        const result: LabelRect = YOLOUtils.parseYOLOAnnotationFromString(
+            rawAnnotation, labelNames, imageSize, imageName
+        );
+
+        // then: bbox = minX=0.1, minY=0.2, maxX=0.9, maxY=0.8
+        expect(result.labelId).toBe(labelId);
+        expect(result.rect.x).toBeCloseTo(100);
+        expect(result.rect.y).toBeCloseTo(200);
+        expect(result.rect.width).toBeCloseTo(800);
+        expect(result.rect.height).toBeCloseTo(600);
     });
 });
 
