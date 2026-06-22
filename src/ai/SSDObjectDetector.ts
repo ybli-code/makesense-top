@@ -14,7 +14,7 @@ import {Notification} from '../data/enums/Notification';
 export class SSDObjectDetector {
     private static model: ObjectDetection;
 
-    public static loadModel(callback?: () => any) {
+    public static loadModel(callback?: () => void) {
         cocoSsd
             .load()
             .then((model: ObjectDetection) => {
@@ -29,7 +29,7 @@ export class SSDObjectDetector {
                     callback();
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 // TODO: Introduce central logging system like Sentry
                 store.dispatch(
                     submitNewNotification(
@@ -41,7 +41,7 @@ export class SSDObjectDetector {
             })
     }
 
-    public static predict(image: HTMLImageElement, callback?: (predictions: DetectedObject[]) => any) {
+    public static predict(image: HTMLImageElement, callback?: (predictions: DetectedObject[]) => void) {
         if (!SSDObjectDetector.model) return;
 
         SSDObjectDetector.model
@@ -51,7 +51,7 @@ export class SSDObjectDetector {
                     callback(predictions)
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 // TODO: Introduce central logging system like Sentry
                 store.dispatch(
                     submitNewNotification(

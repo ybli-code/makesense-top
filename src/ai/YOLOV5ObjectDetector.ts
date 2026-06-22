@@ -15,7 +15,7 @@ import {ImageRepository} from '../logic/imageRepository/ImageRepository';
 export class YOLOV5ObjectDetector {
     private static model: YOLOv5;
 
-    public static loadModel(modelConfig: ModelConfig, onSuccess?: () => any, onFailure?: () => any) {
+    public static loadModel(modelConfig: ModelConfig, onSuccess?: () => void, onFailure?: () => void) {
         const activeImageData: ImageData = LabelsSelector.getActiveImageData();
         const image = ImageRepository.getById(activeImageData.id)
         YOLOV5ObjectDetector.loadModelSafely(modelConfig, image)
@@ -41,12 +41,12 @@ export class YOLOV5ObjectDetector {
             load(modelConfig, [640, 640])
                 .then((model640: YOLOv5) => {
                     model640.detect(image)
-                        .then((detections: DetectedObject[]) => resolve(model640))
-                        .catch((error: Error) => {
+                        .then(() => resolve(model640))
+                        .catch(() => {
                             load(modelConfig, [1280, 1280])
                                 .then((model1280: YOLOv5) => {
                                     model1280.detect(image)
-                                        .then((detections: DetectedObject[]) => resolve(model1280))
+                                        .then(() => resolve(model1280))
                                         .catch(reject)
                                 })
                                 .catch(reject)
@@ -56,7 +56,7 @@ export class YOLOV5ObjectDetector {
         });
     }
 
-    public static predict(image: HTMLImageElement, callback?: (predictions: DetectedObject[]) => any) {
+    public static predict(image: HTMLImageElement, callback?: (predictions: DetectedObject[]) => void) {
         if (!YOLOV5ObjectDetector.model) return;
 
         YOLOV5ObjectDetector.model
@@ -66,7 +66,7 @@ export class YOLOV5ObjectDetector {
                     callback(predictions)
                 }
             })
-            .catch((error) => {
+            .catch((error: unknown) => {
                 // tslint:disable-next-line:no-console
                 console.log(error)
                 // TODO: Introduce central logging system like Sentry
