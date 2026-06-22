@@ -71,7 +71,7 @@ const ExportLabelPopup: React.FC<IProps> = ({ activeLabelType }) => {
                         src={'ico/checkbox-unchecked.png'}
                         alt={'unchecked'}
                     />}
-                {entry.label}
+                {t(entry.labelKey)}
             </div>;
         });
     };

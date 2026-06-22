@@ -133,6 +133,7 @@
     },
     "import": {
         "title": "Import {{type}} annotations",
+        "importAnnotations": "Import {{type}} annotations",
         "import": "Import",
         "cancel": "Cancel",
         "selectFormat": "Select file format you would like to use to import labels.",
@@ -142,10 +143,12 @@
         "importUnsuccessful": "Annotation import was unsuccessful",
         "tryAgain": "Try again",
         "annotationReady": "Annotation ready for import",
+        "annotationReadyMessage": "Annotation is ready to import. After importing, all current annotations will be replaced.",
         "importWarning": "After import you will lose all your current annotations"
     },
     "export": {
         "title": "Export {{type}} annotations",
+        "exportAnnotations": "Export {{type}} annotations",
         "export": "Export",
         "cancel": "Cancel",
         "selectFormat": "Select file format you would like to use to export labels.",
@@ -224,5 +227,41 @@
     "sizeItUp": {
         "windowTooSmall": "Ops... This window is too tight for me!",
         "minSizeRequirement": "Please... make it at least {{width}} x {{height}} px."
+    },
+    "editorFeatures": {
+        "openSource": "Open source and free to use under GPLv3 license",
+        "noInstall": "No advanced installation required, just open up your browser",
+        "noStorage": "We don't store your images, because we don't send them anywhere",
+        "multipleLabelTypes": "Support multiple label types - rects, lines, points and polygons",
+        "multipleFormats": "Support output file formats like YOLO, VOC XML, VGG JSON, CSV",
+        "useAI": "Use AI to make your work more productive"
+    },
+    "toolkit": {
+        "imageRecognition": "Image recognition",
+        "rect": "Rect",
+        "point": "Point",
+        "line": "Line",
+        "polygon": "Polygon"
+    },
+    "emptyLabels": {
+        "drawFirstBoundingBox": "Draw your first bounding box",
+        "markFirstPoint": "Mark your first point",
+        "drawFirstLine": "Draw your first line",
+        "drawFirstPolygon": "Draw your first polygon",
+        "noLabelsYet": "No labels created for this image yet"
+    },
+    "importFormats": {
+        "cocoJson": "Single file in COCO JSON format.",
+        "yoloFormat": "Multiple files in YOLO format along with labels names definition - labels.txt file.",
+        "vocXml": "Multiple files in VOC XML format.",
+        "polygonCocoJson": "Single file in COCO JSON format."
+    },
+    "exportFormats": {
+        "yoloZip": "A .zip package containing files in YOLO format.",
+        "vocZip": "A .zip package containing files in VOC XML format.",
+        "csvSingle": "Single CSV file.",
+        "vggJson": "Single file in VGG JSON format.",
+        "cocoJson": "Single file in COCO JSON format.",
+        "jsonSingle": "Single JSON file."
     }
 }

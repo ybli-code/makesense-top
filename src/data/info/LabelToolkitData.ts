@@ -3,7 +3,7 @@ import {ProjectType} from '../enums/ProjectType';
 
 export interface ILabelToolkit {
     labelType: LabelType;
-    headerText: string;
+    headerTextKey: string;
     imageSrc: string;
     imageAlt: string;
     projectType: ProjectType;
@@ -12,35 +12,35 @@ export interface ILabelToolkit {
 export const LabelToolkitData: ILabelToolkit[] = [
     {
         labelType: LabelType.IMAGE_RECOGNITION,
-        headerText: 'Image recognition',
+        headerTextKey: 'toolkit.imageRecognition',
         imageSrc: 'ico/object.png',
         imageAlt: 'object',
         projectType: ProjectType.IMAGE_RECOGNITION,
     },
     {
         labelType: LabelType.RECT,
-        headerText: 'Rect',
+        headerTextKey: 'toolkit.rect',
         imageSrc: 'ico/rectangle.png',
         imageAlt: 'rectangle',
         projectType: ProjectType.OBJECT_DETECTION,
     },
     {
         labelType: LabelType.POINT,
-        headerText: 'Point',
+        headerTextKey: 'toolkit.point',
         imageSrc: 'ico/point.png',
         imageAlt: 'point',
         projectType: ProjectType.OBJECT_DETECTION,
     },
     {
         labelType: LabelType.LINE,
-        headerText: 'Line',
+        headerTextKey: 'toolkit.line',
         imageSrc: 'ico/line.png',
         imageAlt: 'line',
         projectType: ProjectType.OBJECT_DETECTION,
     },
     {
         labelType: LabelType.POLYGON,
-        headerText: 'Polygon',
+        headerTextKey: 'toolkit.polygon',
         imageSrc: 'ico/polygon.png',
         imageAlt: 'polygon',
         projectType: ProjectType.OBJECT_DETECTION,

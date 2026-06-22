@@ -16,6 +16,7 @@ import {ContextType} from '../../../data/enums/ContextType';
 import EditorBottomNavigationBar from '../EditorBottomNavigationBar/EditorBottomNavigationBar';
 import EditorTopNavigationBar from '../EditorTopNavigationBar/EditorTopNavigationBar';
 import {ProjectType} from '../../../data/enums/ProjectType';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     windowSize: ISize;
@@ -35,6 +36,7 @@ const EditorContainer: React.FC<IProps> = (
     }) => {
     const [leftTabStatus, setLeftTabStatus] = useState(true);
     const [rightTabStatus, setRightTabStatus] = useState(true);
+    const { t } = useTranslation();
 
     const calculateEditorSize = (): ISize => {
         if (windowSize) {
@@ -62,7 +64,7 @@ const EditorContainer: React.FC<IProps> = (
     const leftSideBarCompanionRender = () => {
         return <>
             <VerticalEditorButton
-                label='Images'
+                label={t('editor.images')}
                 image={'/ico/camera.png'}
                 imageAlt={'images'}
                 onClick={leftSideBarButtonOnClick}
@@ -87,7 +89,7 @@ const EditorContainer: React.FC<IProps> = (
     const rightSideBarCompanionRender = () => {
         return <>
             <VerticalEditorButton
-                label='Labels'
+                label={t('editor.labels')}
                 image={'/ico/tags.png'}
                 imageAlt={'labels'}
                 onClick={rightSideBarButtonOnClick}

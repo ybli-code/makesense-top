@@ -14,6 +14,7 @@ import {
 } from '../../../../store/labels/actionCreators';
 import {AppState} from '../../../../store';
 import {connect} from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     size: ISize;
@@ -38,6 +39,7 @@ const LineLabelsList: React.FC<IProps> = (
         updateActiveLabelIdAction
     }
 ) => {
+    const { t } = useTranslation();
     const labelInputFieldHeight = 40;
     const listStyle: React.CSSProperties = {
         width: size.width,
@@ -107,8 +109,8 @@ const LineLabelsList: React.FC<IProps> = (
         >
             {imageData.labelLines.length === 0 ?
                 <EmptyLabelList
-                    labelBefore={'draw your first line'}
-                    labelAfter={'no labels created for this image yet'}
+                    labelBefore={t('emptyLabels.drawFirstLine')}
+                    labelAfter={t('emptyLabels.noLabelsYet')}
                 /> :
                 <Scrollbars>
                     <div

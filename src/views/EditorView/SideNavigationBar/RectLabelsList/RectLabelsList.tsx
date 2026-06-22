@@ -15,6 +15,7 @@ import EmptyLabelList from '../EmptyLabelList/EmptyLabelList';
 import {LabelActions} from '../../../../logic/actions/LabelActions';
 import {LabelStatus} from '../../../../data/enums/LabelStatus';
 import {findLast} from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     size: ISize;
@@ -39,6 +40,7 @@ const RectLabelsList: React.FC<IProps> = (
         updateActiveLabelIdAction
     }
 ) => {
+    const { t } = useTranslation();
     const labelInputFieldHeight = 40;
     const listStyle: React.CSSProperties = {
         width: size.width,
@@ -112,8 +114,8 @@ const RectLabelsList: React.FC<IProps> = (
         >
             {imageData.labelRects.filter((labelRect: LabelRect) => labelRect.status === LabelStatus.ACCEPTED).length === 0 ?
                 <EmptyLabelList
-                    labelBefore={'draw your first bounding box'}
-                    labelAfter={'no labels created for this image yet'}
+                    labelBefore={t('emptyLabels.drawFirstBoundingBox')}
+                    labelAfter={t('emptyLabels.noLabelsYet')}
                 /> :
                 <Scrollbars>
                     <div

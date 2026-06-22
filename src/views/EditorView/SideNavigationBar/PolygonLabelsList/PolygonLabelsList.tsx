@@ -14,6 +14,7 @@ import LabelInputField from '../LabelInputField/LabelInputField';
 import EmptyLabelList from '../EmptyLabelList/EmptyLabelList';
 import {LabelActions} from '../../../../logic/actions/LabelActions';
 import {findLast} from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     size: ISize;
@@ -38,6 +39,7 @@ const PolygonLabelsList: React.FC<IProps> = (
         updateActiveLabelIdAction
     }
 ) => {
+    const { t } = useTranslation();
     const labelInputFieldHeight = 40;
     const listStyle: React.CSSProperties = {
         width: size.width,
@@ -106,8 +108,8 @@ const PolygonLabelsList: React.FC<IProps> = (
         >
             {imageData.labelPolygons.length === 0 ?
                 <EmptyLabelList
-                    labelBefore={'draw your first polygon'}
-                    labelAfter={'no labels created for this image yet'}
+                    labelBefore={t('emptyLabels.drawFirstPolygon')}
+                    labelAfter={t('emptyLabels.noLabelsYet')}
                 /> :
                 <Scrollbars>
                     <div

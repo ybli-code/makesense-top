@@ -133,6 +133,7 @@
     },
     "import": {
         "title": "导入 {{type}} 标注",
+        "importAnnotations": "导入 {{type}} 标注",
         "import": "导入",
         "cancel": "取消",
         "selectFormat": "选择用于导入标签的文件格式。",
@@ -142,10 +143,12 @@
         "importUnsuccessful": "标注导入失败",
         "tryAgain": "重试",
         "annotationReady": "标注已准备好导入",
+        "annotationReadyMessage": "标注已准备好导入。导入后，所有当前标注将被替换。",
         "importWarning": "导入后您将丢失所有当前标注"
     },
     "export": {
         "title": "导出 {{type}} 标注",
+        "exportAnnotations": "导出 {{type}} 标注",
         "export": "导出",
         "cancel": "取消",
         "selectFormat": "选择用于导出标签的文件格式。",
@@ -224,5 +227,41 @@
     "sizeItUp": {
         "windowTooSmall": "哎呀... 这个窗口对我来说太小了！",
         "minSizeRequirement": "请将窗口至少调整到 {{width}} x {{height}} 像素。"
+    },
+    "editorFeatures": {
+        "openSource": "开源免费，基于 GPLv3 许可证",
+        "noInstall": "无需安装，打开浏览器即可使用",
+        "noStorage": "我们不存储您的图片，因为我们不会将其发送到任何地方",
+        "multipleLabelTypes": "支持多种标注类型——矩形框、线段、关键点和多边形",
+        "multipleFormats": "支持多种输出格式，如 YOLO、VOC XML、VGG JSON、CSV",
+        "useAI": "借助 AI 提升您的标注效率"
+    },
+    "toolkit": {
+        "imageRecognition": "图像识别",
+        "rect": "矩形框",
+        "point": "关键点",
+        "line": "线段",
+        "polygon": "多边形"
+    },
+    "emptyLabels": {
+        "drawFirstBoundingBox": "画出您的第一个矩形框",
+        "markFirstPoint": "标记您的第一个关键点",
+        "drawFirstLine": "画出您的第一条线段",
+        "drawFirstPolygon": "画出您的第一个多边形",
+        "noLabelsYet": "此图片暂无标注"
+    },
+    "importFormats": {
+        "cocoJson": "单个 COCO JSON 格式文件。",
+        "yoloFormat": "多个 YOLO 格式文件以及标签名称定义文件 labels.txt。",
+        "vocXml": "多个 VOC XML 格式文件。",
+        "polygonCocoJson": "单个 COCO JSON 格式文件。"
+    },
+    "exportFormats": {
+        "yoloZip": "包含 YOLO 格式文件的 .zip 压缩包。",
+        "vocZip": "包含 VOC XML 格式文件的 .zip 压缩包。",
+        "csvSingle": "单个 CSV 文件。",
+        "vggJson": "单个 VGG JSON 格式文件。",
+        "cocoJson": "单个 COCO JSON 格式文件。",
+        "jsonSingle": "单个 JSON 文件。"
     }
 }

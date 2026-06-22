@@ -73,7 +73,7 @@ const MainView: React.FC = () => {
         return EditorFeatureData.map((data: IEditorFeature) => {
             return <div
                 className='EditorFeaturesTiles'
-                key={data.displayText}
+                key={data.labelKey}
             >
                 <div
                     className='EditorFeaturesTilesWrapper'
@@ -84,7 +84,7 @@ const MainView: React.FC = () => {
                         src={data.imageSrc}
                     />
                     <div className='EditorFeatureLabel'>
-                        {data.displayText}
+                        {t(data.labelKey)}
                     </div>
                 </div>
             </div>;
