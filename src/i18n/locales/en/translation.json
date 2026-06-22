@@ -194,6 +194,20 @@
     },
     "dropzone": {
         "dropImages": "Drop images here",
-        "orClickToUpload": "or click to upload"
+        "orClickToUpload": "or click to upload",
+        "or": "or",
+        "clickToSelect": "Click here to select them"
+    },
+    "projectType": {
+        "objectDetection": "Object Detection",
+        "imageRecognition": "Image recognition"
+    },
+    "featureInProgress": {
+        "messageLine1": "new feature",
+        "messageLine2": "coming soon..."
+    },
+    "sizeItUp": {
+        "windowTooSmall": "Ops... This window is too tight for me!",
+        "minSizeRequirement": "Please... make it at least {{width}} x {{height}} px."
     }
 }

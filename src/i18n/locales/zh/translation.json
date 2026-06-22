@@ -194,6 +194,20 @@
     },
     "dropzone": {
         "dropImages": "拖放图片到此处",
-        "orClickToUpload": "或点击上传图片"
+        "orClickToUpload": "或点击上传图片",
+        "or": "或",
+        "clickToSelect": "点击选择"
+    },
+    "projectType": {
+        "objectDetection": "目标检测",
+        "imageRecognition": "图像识别"
+    },
+    "featureInProgress": {
+        "messageLine1": "新功能",
+        "messageLine2": "即将推出..."
+    },
+    "sizeItUp": {
+        "windowTooSmall": "哎呀... 这个窗口对我来说太小了！",
+        "minSizeRequirement": "请将窗口至少调整到 {{width}} x {{height}} 像素。"
     }
 }
