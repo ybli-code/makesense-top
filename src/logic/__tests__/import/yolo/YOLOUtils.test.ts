@@ -6,6 +6,47 @@ import { v4 as uuidv4 } from 'uuid';
 import { ISize } from '../../../../interfaces/ISize';
 import { IRect } from '../../../../interfaces/IRect';
 
+describe('YOLOUtils extractMaxLabelIndexFromAnnotations method', () => {
+    it('should return the highest label index across all annotation strings', () => {
+        const rawAnnotations = [
+            '0 0.5 0.5 0.2 0.2\n2 0.3 0.3 0.1 0.1',
+            '1 0.4 0.4 0.15 0.15\n5 0.6 0.6 0.2 0.2'
+        ];
+        expect(YOLOUtils.extractMaxLabelIndexFromAnnotations(rawAnnotations)).toBe(5);
+    });
+
+    it('should return -1 when no annotations are provided', () => {
+        expect(YOLOUtils.extractMaxLabelIndexFromAnnotations([])).toBe(-1);
+    });
+
+    it('should return -1 when all annotation strings are empty', () => {
+        expect(YOLOUtils.extractMaxLabelIndexFromAnnotations(['', ''])).toBe(-1);
+    });
+
+    it('should ignore malformed lines', () => {
+        const rawAnnotations = ['abc 0.5 0.5 0.2 0.2\n3 0.3 0.3 0.1 0.1'];
+        expect(YOLOUtils.extractMaxLabelIndexFromAnnotations(rawAnnotations)).toBe(3);
+    });
+});
+
+describe('YOLOUtils generateNumericLabelNames method', () => {
+    it('should generate label names with numeric string names', () => {
+        const result = YOLOUtils.generateNumericLabelNames(3);
+        expect(result.length).toBe(3);
+        expect(result.map((l: LabelName) => l.name)).toEqual(['0', '1', '2']);
+    });
+
+    it('should return an empty array when count is 0', () => {
+        expect(YOLOUtils.generateNumericLabelNames(0)).toEqual([]);
+    });
+
+    it('should assign unique ids to each label', () => {
+        const result = YOLOUtils.generateNumericLabelNames(3);
+        const ids = result.map((l: LabelName) => l.id);
+        expect(new Set(ids).size).toBe(3);
+    });
+});
+
 describe('YOLOUtils parseLabelsFile method', () => {
     it('should return list of label names', () => {
         // given

@@ -2,7 +2,6 @@ import {AnnotationImporter} from '../AnnotationImporter';
 import {ImageData, LabelName} from '../../../store/labels/types';
 import {FileUtil} from '../../../utils/FileUtil';
 import {ArrayUtil} from '../../../utils/ArrayUtil';
-import {NoLabelNamesFileProvidedError} from './YOLOErrors';
 import {LabelsSelector} from '../../../store/selectors/LabelsSelector';
 import {YOLOUtils} from './YOLOUtils';
 import {ImageDataUtil} from '../../../utils/ImageDataUtil';
@@ -10,7 +9,7 @@ import {zip, find} from 'lodash';
 import {ImageRepository} from '../../imageRepository/ImageRepository';
 
 export type YOLOFilesSpec = {
-    labelNameFile: File
+    labelNameFile: File | null
     annotationFiles: File[]
 }
 
@@ -28,22 +27,49 @@ export class YOLOImporter extends AnnotationImporter {
             const {labelNameFile, annotationFiles} = YOLOImporter.filterFilesData(filesData, sourceImagesData);
             const [relevantImageData, relevantAnnotations] = YOLOImporter
                 .matchImagesWithAnnotations(sourceImagesData, annotationFiles);
-            const labelNamesPromise: Promise<LabelName[]> = FileUtil.readFile(labelNameFile)
-                .then((fileContent: string) => YOLOUtils.parseLabelsNamesFromString(fileContent));
             const missingImagesPromise: Promise<void> = ImageDataUtil.loadMissingImages(relevantImageData);
             const annotationFilesPromise: Promise<string[]> = FileUtil.readFiles(relevantAnnotations);
-            Promise
-                .all([labelNamesPromise, missingImagesPromise, annotationFilesPromise])
-                .then((values: [LabelName[], void, string[]]) => {
-                    const [labelNames, , annotationsRaw] = values;
-                    const resultImageData = zip<ImageData, string>(relevantImageData, annotationsRaw)
-                        .map((pair: [ImageData, string]) => YOLOImporter.applyAnnotations(pair[0], pair[1], labelNames))
-                    onSuccess(YOLOImporter.injectImageDataWithAnnotations(sourceImagesData, resultImageData), labelNames);
-                })
-                .catch((error: Error) => onFailure(error))
+            if (labelNameFile !== null) {
+                const labelNamesPromise: Promise<LabelName[]> = FileUtil.readFile(labelNameFile)
+                    .then((fileContent: string) => YOLOUtils.parseLabelsNamesFromString(fileContent));
+                Promise
+                    .all([labelNamesPromise, missingImagesPromise, annotationFilesPromise])
+                    .then((values: [LabelName[], void, string[]]) => {
+                        const [labelNames, , annotationsRaw] = values;
+                        const resultImageData = zip<ImageData, string>(relevantImageData, annotationsRaw)
+                            .map((pair: [ImageData, string]) => YOLOImporter.applyAnnotations(pair[0], pair[1], labelNames))
+                        onSuccess(YOLOImporter.injectImageDataWithAnnotations(sourceImagesData, resultImageData), labelNames);
+                    })
+                    .catch((error: Error) => onFailure(error))
+            } else {
+                Promise
+                    .all([missingImagesPromise, annotationFilesPromise])
+                    .then((values: [void, string[]]) => {
+                        const [, annotationsRaw] = values;
+                        const labelNames = YOLOImporter.resolveLabelNames(annotationsRaw);
+                        const resultImageData = zip<ImageData, string>(relevantImageData, annotationsRaw)
+                            .map((pair: [ImageData, string]) => YOLOImporter.applyAnnotations(pair[0], pair[1], labelNames))
+                        onSuccess(YOLOImporter.injectImageDataWithAnnotations(sourceImagesData, resultImageData), labelNames);
+                    })
+                    .catch((error: Error) => onFailure(error))
+            }
         } catch (error) {
             onFailure(error as Error)
         }
+    }
+
+    /**
+     * Resolves label names when no labels.txt is provided.
+     * First tries to use existing project labels (by index) if they cover all used indices.
+     * Falls back to generating numeric label names ("0", "1", "2", ...).
+     */
+    private static resolveLabelNames(annotationsRaw: string[]): LabelName[] {
+        const maxIndex = YOLOUtils.extractMaxLabelIndexFromAnnotations(annotationsRaw);
+        const existingLabels = LabelsSelector.getLabelNames();
+        if (existingLabels.length > 0 && existingLabels.length > maxIndex) {
+            return existingLabels;
+        }
+        return YOLOUtils.generateNumericLabelNames(maxIndex + 1);
     }
 
     public static filterFilesData(filesData: File[], imagesData: ImageData[]): YOLOFilesSpec {
@@ -51,9 +77,9 @@ export class YOLOImporter extends AnnotationImporter {
             filesData,
             (i: File) => i.name === YOLOImporter.labelsFileName
         )
-        if (functionalityPartitionResult.pass.length !== 1) {
-            throw new NoLabelNamesFileProvidedError()
-        }
+        const labelNameFile: File | null = functionalityPartitionResult.pass.length === 1
+            ? functionalityPartitionResult.pass[0]
+            : null;
         const imageIdentifiers: string[] = imagesData
             .map((i: ImageData) => i.fileData.name)
             .map((i: string) => FileUtil.extractFileName(i))
@@ -62,7 +88,7 @@ export class YOLOImporter extends AnnotationImporter {
             (i: File) => imageIdentifiers.includes(FileUtil.extractFileName(i.name))
         )
         return {
-            labelNameFile: functionalityPartitionResult.pass[0],
+            labelNameFile,
             annotationFiles: matchingPartitionResult.pass
         }
     }

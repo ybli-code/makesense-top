@@ -65,4 +65,27 @@ describe('YOLOImporter filterFilesData method', () => {
         expect(result.annotationFiles.length).toEqual(3);
         expect(isEqual(resultNames, expectedAnnotationFileNames)).toBe(true);
     });
+
+    it('should return null labelNameFile when labels.txt is not provided', () => {
+        // given
+        const imageFileNames = [
+            '00000.png',
+            '00001.png',
+            '00002.png'
+        ];
+        const imagesData: ImageData[] = imageFileNames.map((fileName: string) => getDummyImageData(fileName));
+        const annotationFileNames = [
+            '00000.txt',
+            '00001.txt',
+            '00002.txt'
+        ];
+        const filesData: File[] = annotationFileNames.map((fileName: string) => getDummyFileData(fileName));
+
+        // when
+        const result = YOLOImporter.filterFilesData(filesData, imagesData);
+
+        // then
+        expect(result.labelNameFile).toBeNull();
+        expect(result.annotationFiles.length).toEqual(3);
+    });
 });
