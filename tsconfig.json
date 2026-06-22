@@ -29,6 +29,7 @@
     "strictPropertyInitialization": false,
     "noFallthroughCasesInSwitch": true,
     "types": [
+      "node",
       "vite/client",
     ]
   },
