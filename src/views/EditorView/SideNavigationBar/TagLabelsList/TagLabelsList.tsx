@@ -11,6 +11,7 @@ import classNames from "classnames";
 import {ImageButton} from "../../../Common/ImageButton/ImageButton";
 import {PopupWindowType} from "../../../../data/enums/PopupWindowType";
 import {updateActivePopupType} from "../../../../store/general/actionCreators";
+import { useTranslation } from "react-i18next";
 interface IProps {
     size: ISize;
     imageData: ImageData;
@@ -27,6 +28,7 @@ const TagLabelsList: React.FC<IProps> = (
         labelNames,
         updateActivePopupType
     }) => {
+    const { t } = useTranslation();
     const labelInputFieldHeight = 40;
     const listStyle: React.CSSProperties = {
         width: size.width,
@@ -101,7 +103,7 @@ const TagLabelsList: React.FC<IProps> = (
                         alt={"upload"}
                         src={"ico/type-writer.png"}
                     />
-                    <p className="extraBold">Your label list is empty</p>
+                    <p className="extraBold">{t('labels.emptyLabelList')}</p>
                 </div> :
                 <Scrollbars>
                     <div

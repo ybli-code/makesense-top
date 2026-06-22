@@ -44,6 +44,7 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
         projectType,
         enablePerClassColoration
     }) => {
+    const { t } = useTranslation();
     const [labelNames, setLabelNames] = useState(LabelsSelector.getLabelNames());
 
     const validateEmptyLabelNames = (): boolean => {
@@ -125,7 +126,7 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
                 autoFocus={true}
                 type={'text'}
                 margin={'dense'}
-                label={'Insert label'}
+                label={t('labels.insertLabel')}
                 onKeyUp={onKeyUpCallback}
                 value={labelName.name}
                 onChange={onChangeCallback}
@@ -203,10 +204,8 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
                 <div className='Message'>
                     {
                         isUpdate ?
-                            'You can now edit the label names you use to describe the objects in the photos. Use the ' +
-                            '+ button to add a new empty text field.' :
-                            'Before you start, you can create a list of labels you plan to assign to objects in your ' +
-                            'project. You can also choose to skip that part for now and define label names as you go.'
+                            t('labels.editLabelsMessage') :
+                            t('labels.createLabelsMessage')
                     }
                 </div>
                 <div className='LabelsContainer'>
@@ -226,7 +225,7 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
                                 alt={'upload'}
                                 src={'ico/type-writer.png'}
                             />
-                            <p className='extraBold'>Your label list is empty</p>
+                            <p className='extraBold'>{t('labels.emptyLabelList')}</p>
                         </div>}
                 </div>
             </div>
@@ -235,11 +234,11 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
 
     return (
         <GenericYesNoPopup
-            title={isUpdate ? 'Edit labels' : 'Create labels'}
+        title={isUpdate ? t('labels.editLabelsTitle') : t('labels.createLabelsTitle')}
             renderContent={renderContent}
-            acceptLabel={isUpdate ? 'Accept' : 'Start project'}
+        acceptLabel={isUpdate ? t('labels.accept') : t('labels.startProject')}
             onAccept={isUpdate ? safeOnUpdateAcceptCallback : safeOnCreateAcceptCallback}
-            rejectLabel={isUpdate ? 'Cancel' : 'Load labels from file'}
+        rejectLabel={isUpdate ? t('common.cancel') : t('labels.loadLabelsFromFile')}
             onReject={isUpdate ? onUpdateRejectCallback : onCreateRejectCallback}
         />);
 };
