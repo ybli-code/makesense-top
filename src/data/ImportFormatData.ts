@@ -8,15 +8,18 @@ export const ImportFormatData: ImportFormatDataMap = {
     [LabelType.RECT]: [
         {
             type: AnnotationFormatType.COCO,
-            label: 'Single file in COCO JSON format.'
+            label: 'Single file in COCO JSON format.',
+            labelKey: 'importFormats.cocoJson'
         },
         {
             type: AnnotationFormatType.YOLO,
-            label: 'Multiple files in YOLO format along with labels names definition - labels.txt file.'
+            label: 'Multiple files in YOLO format along with labels names definition - labels.txt file.',
+            labelKey: 'importFormats.yoloFormat'
         },
         {
             type: AnnotationFormatType.VOC,
-            label: 'Multiple files in VOC XML format.'
+            label: 'Multiple files in VOC XML format.',
+            labelKey: 'importFormats.vocXml'
         }
     ],
     [LabelType.POINT]: [],
@@ -24,7 +27,8 @@ export const ImportFormatData: ImportFormatDataMap = {
     [LabelType.POLYGON]: [
         {
             type: AnnotationFormatType.COCO,
-            label: 'Single file in COCO JSON format.'
+            label: 'Single file in COCO JSON format.',
+            labelKey: 'importFormats.polygonCocoJson'
         }
     ],
     [LabelType.IMAGE_RECOGNITION]: []

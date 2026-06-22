@@ -1,37 +1,37 @@
 export interface IEditorFeature {
-    displayText:string;
+    labelKey: string;
     imageSrc:string;
     imageAlt:string;
 }
 
 export const EditorFeatureData: IEditorFeature[] = [
     {
-        displayText: 'Open source and free to use under GPLv3 license',
+        labelKey: 'editorFeatures.openSource',
         imageSrc: 'ico/open-source.png',
         imageAlt: 'open-source',
     },
     {
-        displayText: 'No advanced installation required, just open up your browser',
+        labelKey: 'editorFeatures.noInstall',
         imageSrc: 'ico/online.png',
         imageAlt: 'online',
     },
     {
-        displayText: "We don't store your images, because we don't send them anywhere",
+        labelKey: 'editorFeatures.noStorage',
         imageSrc: 'ico/private.png',
         imageAlt: 'private',
     },
     {
-        displayText: 'Support multiple label types - rects, lines, points and polygons',
+        labelKey: 'editorFeatures.multipleLabelTypes',
         imageSrc: 'ico/labels.png',
         imageAlt: 'labels',
     },
     {
-        displayText: 'Support output file formats like YOLO, VOC XML, VGG JSON, CSV',
+        labelKey: 'editorFeatures.multipleFormats',
         imageSrc: 'ico/file.png',
         imageAlt: 'file',
     },
     {
-        displayText: 'Use AI to make your work more productive',
+        labelKey: 'editorFeatures.useAI',
         imageSrc: 'ico/robot.png',
         imageAlt: 'robot',
     },

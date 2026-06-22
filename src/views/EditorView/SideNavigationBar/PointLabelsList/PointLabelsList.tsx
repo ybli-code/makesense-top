@@ -15,6 +15,7 @@ import EmptyLabelList from '../EmptyLabelList/EmptyLabelList';
 import {LabelActions} from '../../../../logic/actions/LabelActions';
 import {findLast} from 'lodash';
 import {LabelStatus} from '../../../../data/enums/LabelStatus';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     size: ISize;
@@ -39,6 +40,7 @@ const PointLabelsList: React.FC<IProps> = (
         updateActiveLabelIdAction
     }
 ) => {
+    const { t } = useTranslation();
     const labelInputFieldHeight = 40;
     const listStyle: React.CSSProperties = {
         width: size.width,
@@ -109,8 +111,8 @@ const PointLabelsList: React.FC<IProps> = (
         >
             {imageData.labelPoints.filter((labelPoint: LabelPoint) => labelPoint.status === LabelStatus.ACCEPTED).length === 0 ?
                 <EmptyLabelList
-                    labelBefore={'mark your first point'}
-                    labelAfter={'no labels created for this image yet'}
+                    labelBefore={t('emptyLabels.markFirstPoint')}
+                    labelAfter={t('emptyLabels.noLabelsYet')}
                 /> :
                 <Scrollbars>
                     <div

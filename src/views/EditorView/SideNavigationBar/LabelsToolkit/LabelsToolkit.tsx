@@ -117,7 +117,7 @@ class LabelsToolkit extends React.Component<IProps & WithTranslation, IState> {
                             src={tabData.imageSrc}
                             alt={tabData.imageAlt}
                         />
-                        {tabData.headerText}
+                        {this.props.t(tabData.headerTextKey)}
                     </div>
                     <div className="HeaderGroupWrapper">
                         <img

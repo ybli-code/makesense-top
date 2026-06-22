@@ -8,6 +8,7 @@ import classNames from 'classnames'
 import {EditorFeatureData, IEditorFeature} from "../../data/info/EditorFeatureData";
 import {ISocialMedia, SocialMediaData} from "../../data/info/SocialMediaData";
 import {ImageButton} from "../Common/ImageButton/ImageButton";
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     size: ISize;
@@ -16,6 +17,7 @@ interface IProps {
 const MobileMainView: React.FC<IProps> = ({size}) => {
     const scrollPositionThreshold: number = 350;
     const [scrollPosition, setScrollPosition] = useState(0);
+    const { t } = useTranslation();
 
     const getClassName = () => {
         return classNames('MobileTopNavigationBar', {
@@ -32,7 +34,7 @@ const MobileMainView: React.FC<IProps> = ({size}) => {
         return features.map((data:IEditorFeature) => {
             return <div
                 className="EditorFeaturesTiles"
-                key={data.displayText}
+                key={data.labelKey}
             >
                 <div
                     className="EditorFeaturesTilesWrapper"
@@ -43,7 +45,7 @@ const MobileMainView: React.FC<IProps> = ({size}) => {
                         src={data.imageSrc}
                     />
                     <div className="EditorFeatureLabel">
-                        {data.displayText}
+                        {t(data.labelKey)}
                     </div>
                 </div>
             </div>

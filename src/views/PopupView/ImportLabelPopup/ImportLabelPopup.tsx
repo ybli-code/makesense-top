@@ -165,7 +165,7 @@ const ImportLabelPopup: React.FC<IProps> = (
                         src={'ico/checkbox-unchecked.png'}
                         alt={'unchecked'}
                     />}
-                {entry.label}
+                {t(entry.labelKey)}
             </div>;
         });
     };
