@@ -72,7 +72,7 @@ const MobileMainView: React.FC<IProps> = ({size}) => {
                     alt={"make-sense"}
                     src={"/make-sense-ico-transparent.png"}
                 />
-                Make Sense
+                {t('main.title')}
             </div>
         </div>
         <div className="TriangleHorizontal Bottom">
@@ -107,7 +107,7 @@ const MobileMainView: React.FC<IProps> = ({size}) => {
 
     const fourthStage = <div className="FourthStage">
         <div className="Message">
-            Due to the small size of the screen we do not support our editor on mobile devices. Check what you missed and visit us from a desktop.
+            {t('mobile.notSupported')}
         </div>
         <div className="SocialMediaWrapper">
             {getSocialMediaButtons({width: 40, height: 40})}
