@@ -15,6 +15,7 @@ import { AISelector } from '../../../store/selectors/AISelector';
 import { ISize } from '../../../interfaces/ISize';
 import { AIActions } from '../../../logic/actions/AIActions';
 import { Fade, styled, Tooltip, tooltipClasses, TooltipProps } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 const BUTTON_SIZE: ISize = { width: 30, height: 30 };
 const BUTTON_PADDING: number = 10;
 
@@ -80,6 +81,8 @@ const EditorTopNavigationBar: React.FC<IProps> = (
         crossHairVisible,
         activeLabelType
     }) => {
+    const { t } = useTranslation();
+
     const getClassName = () => {
         return classNames(
             'EditorTopNavigationBar',
@@ -115,7 +118,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'zoom-in',
-                        'zoom in',
+                        t('editor.zoomIn'),
                         'ico/zoom-in.png',
                         'zoom-in',
                         false,
@@ -126,7 +129,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'zoom-out',
-                        'zoom out',
+                        t('editor.zoomOut'),
                         'ico/zoom-out.png',
                         'zoom-out',
                         false,
@@ -137,7 +140,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'zoom-fit',
-                        'fit image to available space',
+                        t('editor.zoomFit'),
                         'ico/zoom-fit.png',
                         'zoom-fit',
                         false,
@@ -148,7 +151,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'zoom-max',
-                        'maximum allowed image zoom',
+                        t('editor.zoomMax'),
                         'ico/zoom-max.png',
                         'zoom-max',
                         false,
@@ -161,7 +164,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'image-drag-mode',
-                        imageDragMode ? 'turn-off image drag mode' : 'turn-on image drag mode - works only when image is zoomed',
+                        imageDragMode ? t('editor.turnOffImageDragMode') : t('editor.turnOnImageDragMode'),
                         'ico/hand.png',
                         'image-drag-mode',
                         imageDragMode,
@@ -172,7 +175,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                 {
                     getButtonWithTooltip(
                         'cursor-cross-hair',
-                        crossHairVisible ? 'turn-off cursor cross-hair' : 'turn-on cursor cross-hair',
+                        crossHairVisible ? t('editor.turnOffCrossHair') : t('editor.turnOnCrossHair'),
                         'ico/cross-hair.png',
                         'cross-hair',
                         crossHairVisible,
@@ -185,7 +188,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                     {
                         getButtonWithTooltip(
                             'accept-all',
-                            'accept all proposed detections',
+                            t('editor.acceptAllDetections'),
                             'ico/accept-all.png',
                             'accept-all',
                             false,
@@ -196,7 +199,7 @@ const EditorTopNavigationBar: React.FC<IProps> = (
                     {
                         getButtonWithTooltip(
                             'reject-all',
-                            'reject all proposed detections',
+                            t('editor.rejectAllDetections'),
                             'ico/reject-all.png',
                             'reject-all',
                             false,

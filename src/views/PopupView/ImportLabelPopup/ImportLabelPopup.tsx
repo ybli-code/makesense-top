@@ -19,6 +19,7 @@ import { NotificationsDataMap } from '../../../data/info/NotificationsData';
 import { DocumentParsingError } from '../../../logic/import/voc/VOCImporter';
 import { Notification } from '../../../data/enums/Notification';
 import {LabelNamesNotUniqueError} from '../../../logic/import/yolo/YOLOErrors';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     activeLabelType: LabelType,
@@ -34,6 +35,7 @@ const ImportLabelPopup: React.FC<IProps> = (
         updateLabelNamesAction,
         updateActiveLabelTypeAction
     }) => {
+    const { t } = useTranslation();
     const resolveFormatType = (labelType: LabelType): AnnotationFormatType => {
         const possibleImportFormats = ImportFormatData[labelType];
         return possibleImportFormats.length === 1 ? possibleImportFormats[0].type : null;
@@ -116,9 +118,9 @@ const ImportLabelPopup: React.FC<IProps> = (
                     alt={'upload'}
                     src={'ico/box-opened.png'}
                 />
-                <p className='extraBold'>Annotation import was unsuccessful</p>
+                <p className='extraBold'>{t('import.importUnsuccessful')}</p>
                 {annotationsLoadedError.message}
-                <p className='extraBold'>Try again</p>
+                <p className='extraBold'>{t('import.tryAgain')}</p>
             </>;
         } else if (loadedImageData.length !== 0 && loadedLabelNames.length !== 0) {
             return <>
@@ -127,9 +129,8 @@ const ImportLabelPopup: React.FC<IProps> = (
                     alt={'uploaded'}
                     src={'ico/box-closed.png'}
                 />
-                <p className='extraBold'>Annotation ready for import</p>
-                After import you will lose
-                all your current annotations
+                <p className='extraBold'>{t('import.annotationReady')}</p>
+                {t('import.annotationReadyMessage')}
             </>;
         } else {
             return <>
@@ -139,9 +140,9 @@ const ImportLabelPopup: React.FC<IProps> = (
                     alt={'upload'}
                     src={'ico/box-opened.png'}
                 />
-                <p className='extraBold'>{`Drop ${formatType} annotations`}</p>
-                <p>or</p>
-                <p className='extraBold'>Click here to select them</p>
+                <p className='extraBold'>{t('import.dropAnnotations', { format: formatType })}</p>
+                <p>{t('import.or')}</p>
+                <p className='extraBold'>{t('import.clickToSelect')}</p>
             </>;
         }
     };
@@ -173,7 +174,7 @@ const ImportLabelPopup: React.FC<IProps> = (
         if (!formatType && ImportFormatData[type].length !== 0) {
             return <>
                 <div className='Message'>
-                    Select file format you would like to use to import labels.
+                    {t('import.selectFormat')}
                 </div>,
                 <div className='Options'>
                     {getOptions(ImportFormatData[type])}
@@ -191,13 +192,13 @@ const ImportLabelPopup: React.FC<IProps> = (
     return (
         <GenericLabelTypePopup
             activeLabelType={labelType}
-            title={`Import ${labelType.toLowerCase()} annotations`}
+            title={t('import.importAnnotations', { type: labelType.toLowerCase() })}
             onLabelTypeChange={onLabelTypeChange}
-            acceptLabel={'Import'}
+            acceptLabel={t('import.import')}
             onAccept={onAccept}
             skipAcceptButton={ImportFormatData[labelType].length === 0}
             disableAcceptButton={loadedImageData.length === 0 || loadedLabelNames.length === 0 || !!annotationsLoadedError}
-            rejectLabel={'Cancel'}
+            rejectLabel={t('common.cancel')}
             onReject={onReject}
             renderInternalContent={renderInternalContent}
         />

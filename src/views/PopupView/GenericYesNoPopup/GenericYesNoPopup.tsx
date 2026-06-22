@@ -3,6 +3,7 @@ import './GenericYesNoPopup.scss'
 import {TextButton} from '../../Common/TextButton/TextButton';
 import {ContextManager} from '../../../logic/context/ContextManager';
 import {ContextType} from '../../../data/enums/ContextType';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     title: string;

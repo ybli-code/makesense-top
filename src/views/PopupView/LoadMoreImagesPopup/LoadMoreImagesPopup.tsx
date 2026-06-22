@@ -8,12 +8,14 @@ import { useDropzone } from 'react-dropzone';
 import { ImageData } from '../../../store/labels/types';
 import { PopupActions } from '../../../logic/actions/PopupActions';
 import { ImageDataUtil } from '../../../utils/ImageDataUtil';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     addImageData: (imageData: ImageData[]) => any;
 }
 
 const LoadMoreImagesPopup: React.FC<IProps> = ({ addImageData }) => {
+    const { t } = useTranslation();
     const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
         accept: {
             'image/*': ['.jpeg', '.png']
@@ -40,9 +42,9 @@ const LoadMoreImagesPopup: React.FC<IProps> = ({ addImageData }) => {
                     alt={'upload'}
                     src={'ico/box-opened.png'}
                 />
-                <p className='extraBold'>Add new images</p>
-                <p>or</p>
-                <p className='extraBold'>Click here to select them</p>
+                <p className='extraBold'>{t('images.addNewImages')}</p>
+                <p>{t('import.or')}</p>
+                <p className='extraBold'>{t('import.clickToSelect')}</p>
             </>;
         else if (acceptedFiles.length === 1)
             return <>
@@ -51,7 +53,7 @@ const LoadMoreImagesPopup: React.FC<IProps> = ({ addImageData }) => {
                     alt={'uploaded'}
                     src={'ico/box-closed.png'}
                 />
-                <p className='extraBold'>1 new image loaded</p>
+                <p className='extraBold'>{t('images.oneImageLoaded')}</p>
             </>;
         else
             return <>
@@ -61,7 +63,7 @@ const LoadMoreImagesPopup: React.FC<IProps> = ({ addImageData }) => {
                     alt={'uploaded'}
                     src={'ico/box-closed.png'}
                 />
-                <p key={2} className='extraBold'>{acceptedFiles.length} new images loaded</p>
+                <p key={2} className='extraBold'>{t('images.multipleImagesLoaded', { count: acceptedFiles.length })}</p>
             </>;
     };
 
@@ -75,12 +77,12 @@ const LoadMoreImagesPopup: React.FC<IProps> = ({ addImageData }) => {
 
     return (
         <GenericYesNoPopup
-            title={'Load more images'}
+            title={t('images.loadMoreImages')}
             renderContent={renderContent}
-            acceptLabel={'Load'}
+            acceptLabel={t('images.load')}
             disableAcceptButton={acceptedFiles.length < 1}
             onAccept={onAccept}
-            rejectLabel={'Cancel'}
+            rejectLabel={t('common.cancel')}
             onReject={onReject}
         />
     );

@@ -9,10 +9,13 @@ import { EditorFeatureData, IEditorFeature } from '../../data/info/EditorFeature
 import { styled, Tooltip, tooltipClasses, TooltipProps } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import ImagesDropZone from './ImagesDropZone/ImagesDropZone';
+import LanguageSelector from '../Common/LanguageSelector/LanguageSelector';
+import { useTranslation } from 'react-i18next';
 
 const MainView: React.FC = () => {
     const [projectInProgress, setProjectInProgress] = useState(false);
     const [projectCanceled, setProjectCanceled] = useState(false);
+    const { t } = useTranslation();
 
     const startProject = () => {
         setProjectInProgress(true);
@@ -90,6 +93,9 @@ const MainView: React.FC = () => {
 
     return (
         <div className={getClassName()}>
+            <div className='LanguageSelectorWrapper'>
+                <LanguageSelector />
+            </div>
             <div className='Slider' id='lower'>
                 <div className='TriangleVertical'>
                     <div className='TriangleVerticalContent' />
@@ -117,7 +123,7 @@ const MainView: React.FC = () => {
                     <div className='TriangleVerticalContent' />
                 </div>
                 {projectInProgress && <TextButton
-                    label={'Go Back'}
+                    label={t('common.goBack')}
                     onClick={endProject}
                 />}
             </div>
@@ -128,7 +134,7 @@ const MainView: React.FC = () => {
                     {getSocialMediaButtons({ width: 30, height: 30 })}
                 </div>
                 {!projectInProgress && <TextButton
-                    label={'Get Started'}
+                    label={t('common.getStarted')}
                     onClick={startProject}
                     externalClassName={'get-started-button'}
                 />}

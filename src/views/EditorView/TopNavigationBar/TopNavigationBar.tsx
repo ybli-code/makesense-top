@@ -10,6 +10,7 @@ import {ImageButton} from '../../Common/ImageButton/ImageButton';
 import {Settings} from '../../../settings/Settings';
 import {ProjectData} from '../../../store/general/types';
 import DropDownMenu from './DropDownMenu/DropDownMenu';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     updateActivePopupTypeAction: (activePopupType: PopupWindowType) => any;
@@ -18,6 +19,8 @@ interface IProps {
 }
 
 const TopNavigationBar: React.FC<IProps> = (props) => {
+    const { t } = useTranslation();
+
     const onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
         event.target.setSelectionRange(0, event.target.value.length);
     };
@@ -49,14 +52,14 @@ const TopNavigationBar: React.FC<IProps> = (props) => {
                             alt={'make-sense'}
                             src={'/make-sense-ico-transparent.png'}
                         />
-                        Make Sense
+                        {t('editor.makeSense')}
                     </div>
                 </div>
                 <div className='NavigationBarGroupWrapper'>
                     <DropDownMenu/>
                 </div>
                 <div className='NavigationBarGroupWrapper middle'>
-                    <div className='ProjectName'>Project Name:</div>
+                    <div className='ProjectName'>{t('editor.projectName')}:</div>
                     <TextInput
                         isPassword={false}
                         value={props.projectData.name}

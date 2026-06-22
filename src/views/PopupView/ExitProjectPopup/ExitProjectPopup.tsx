@@ -14,6 +14,7 @@ import { ImageData, LabelName } from "../../../store/labels/types";
 import { PopupActions } from "../../../logic/actions/PopupActions";
 import { ProjectData } from "../../../store/general/types";
 import { updateProjectData as storeUpdateProjectData } from "../../../store/general/actionCreators";
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     updateActiveImageIndex: (activeImageIndex: number) => any;
@@ -32,13 +33,13 @@ const ExitProjectPopup: React.FC<IProps> = ({
     updateFirstLabelCreatedFlag,
     updateProjectData
 }: IProps) => {
-
+    const { t } = useTranslation();
 
     const renderContent = () => {
         return (
             <div className="ExitProjectPopupContent">
                 <div className="Message">
-                    Are you sure you want to leave the editor? You will permanently lose all your progress.
+                    {t('project.exitMessage')}
                 </div>
             </div>
         );
@@ -60,11 +61,11 @@ const ExitProjectPopup: React.FC<IProps> = ({
 
     return (
         <GenericYesNoPopup
-            title={"Exit project"}
+            title={t('project.exitProject')}
             renderContent={renderContent}
-            acceptLabel={"Exit"}
+            acceptLabel={t('project.exit')}
             onAccept={onAccept}
-            rejectLabel={"Back"}
+            rejectLabel={t('project.back')}
             onReject={onReject}
         />);
 };

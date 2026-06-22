@@ -1,0 +1,20 @@
+.LanguageSelector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .language-text {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        user-select: none;
+    }
+}

@@ -18,6 +18,7 @@ import { RoboflowAPIObjectDetector } from '../../../ai/RoboflowAPIObjectDetector
 import { ClipLoader } from 'react-spinners';
 import { CSSHelper } from '../../../logic/helpers/CSSHelper';
 import { updateRoboflowAPIDetails } from '../../../store/ai/actionCreators';
+import { useTranslation } from 'react-i18next';
 import { AIActions } from '../../../logic/actions/AIActions';
 import { ImageRepository } from '../../../logic/imageRepository/ImageRepository';
 import { ImageData } from '../../../store/labels/types';
@@ -36,6 +37,7 @@ const ConnectInferenceServerPopup: React.FC<IProps> = (
         updateRoboflowAPIDetailsAction
     }
 ) => {
+    const { t } = useTranslation();
     // general
     const [currentServerType, setCurrentServerType] = useState(InferenceServerType.ROBOFLOW);
     const [modelIsLoadingStatus, setModelIsLoadingStatus] = useState(false);
@@ -121,7 +123,7 @@ const ConnectInferenceServerPopup: React.FC<IProps> = (
     const renderRoboflow = () => {
         return <>
             <div className='message'>
-                Provide details of the Roboflow model you want to run over tha API, as well as your API key.
+                {t('model.roboflowMessage')}
             </div>
             <div className='details'>
                 <StyledTextField
@@ -131,7 +133,7 @@ const ConnectInferenceServerPopup: React.FC<IProps> = (
                     autoFocus={true}
                     type={'text'}
                     margin={'dense'}
-                    label={'roboflow model'}
+                    label={t('model.roboflowModel')}
                     value={roboflowModel}
                     onChange={roboflowModelOnChangeCallback}
                     style={{ width: 280 }}
@@ -144,7 +146,7 @@ const ConnectInferenceServerPopup: React.FC<IProps> = (
                     autoFocus={true}
                     type={'password'}
                     margin={'dense'}
-                    label={'roboflow api key'}
+                    label={t('model.roboflowApiKey')}
                     value={roboflowKey}
                     onChange={roboflowKeyOnChangeCallback}
                     style={{ width: 280 }}
@@ -184,10 +186,10 @@ const ConnectInferenceServerPopup: React.FC<IProps> = (
             title={InferenceServerDataMap[currentServerType].name}
             renderContent={renderContent}
             renderSideMenuContent={renderSideMenuContent}
-            acceptLabel={'Connect'}
+            acceptLabel={t('model.connect')}
             onAccept={onAccept}
             disableAcceptButton={disableAcceptButton()}
-            rejectLabel={'Back'}
+            rejectLabel={t('project.back')}
             onReject={onReject}
         />
     );

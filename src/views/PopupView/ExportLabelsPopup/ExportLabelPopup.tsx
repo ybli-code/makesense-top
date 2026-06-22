@@ -13,12 +13,14 @@ import GenericLabelTypePopup from '../GenericLabelTypePopup/GenericLabelTypePopu
 import { ExportFormatData } from '../../../data/ExportFormatData';
 import { AppState } from '../../../store';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     activeLabelType: LabelType,
 }
 
 const ExportLabelPopup: React.FC<IProps> = ({ activeLabelType }) => {
+    const { t } = useTranslation();
     const [labelType, setLabelType] = useState(activeLabelType);
     const [exportFormatType, setExportFormatType] = useState(null);
 
@@ -77,7 +79,7 @@ const ExportLabelPopup: React.FC<IProps> = ({ activeLabelType }) => {
     const renderInternalContent = (type: LabelType) => {
         return <>
             <div className='Message'>
-                Select label type and the file format you would like to use to export labels.
+                {t('export.selectFormat')}
             </div>,
             <div className='Options'>
                 {getOptions(ExportFormatData[type])}
@@ -93,12 +95,12 @@ const ExportLabelPopup: React.FC<IProps> = ({ activeLabelType }) => {
     return (
         <GenericLabelTypePopup
             activeLabelType={labelType}
-            title={`Export ${labelType.toLowerCase()} annotations`}
+            title={t('export.exportAnnotations', { type: labelType.toLowerCase() })}
             onLabelTypeChange={onLabelTypeChange}
-            acceptLabel={'Export'}
+            acceptLabel={t('export.export')}
             onAccept={onAccept}
             disableAcceptButton={!exportFormatType}
-            rejectLabel={'Cancel'}
+            rejectLabel={t('common.cancel')}
             onReject={onReject}
             renderInternalContent={renderInternalContent}
         />

@@ -15,6 +15,7 @@ import {NotificationsDataMap} from '../../../data/info/NotificationsData';
 import {Notification} from '../../../data/enums/Notification';
 import {submitNewNotification} from '../../../store/notifications/actionCreators';
 import {INotification} from '../../../store/notifications/types';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
     updateActivePopupTypeAction: (activePopupType: PopupWindowType) => any;
@@ -25,6 +26,7 @@ interface IProps {
 const LoadLabelNamesPopup: React.FC<IProps> = (
     { updateActivePopupTypeAction, updateLabelNamesAction, submitNewNotificationAction }
 ) => {
+    const { t } = useTranslation();
     const [labelsList, setLabelsList] = useState([]);
     const [invalidFileLoadedStatus, setInvalidFileLoadedStatus] = useState(false);
 
@@ -72,8 +74,8 @@ const LoadLabelNamesPopup: React.FC<IProps> = (
                     alt={'upload'}
                     src={'ico/box-opened.png'}
                 />
-                <p className='extraBold'>Loading of labels file was unsuccessful</p>
-                <p className='extraBold'>Try again</p>
+                <p className='extraBold'>{t('loadLabels.loadUnsuccessful')}</p>
+                <p className='extraBold'>{t('loadLabels.tryAgain')}</p>
             </>;
         else if (acceptedFiles.length === 0)
             return <>
@@ -83,9 +85,9 @@ const LoadLabelNamesPopup: React.FC<IProps> = (
                     alt={'upload'}
                     src={'ico/box-opened.png'}
                 />
-                <p className='extraBold'>Drop labels file</p>
-                <p>or</p>
-                <p className='extraBold'>Click here to select it</p>
+                <p className='extraBold'>{t('loadLabels.dropLabelsFile')}</p>
+                <p>{t('loadLabels.or')}</p>
+                <p className='extraBold'>{t('loadLabels.clickToSelect')}</p>
             </>;
         else if (labelsList.length === 1)
             return <>
@@ -94,7 +96,7 @@ const LoadLabelNamesPopup: React.FC<IProps> = (
                     alt={'uploaded'}
                     src={'ico/box-closed.png'}
                 />
-                <p className='extraBold'>only 1 label found</p>
+                <p className='extraBold'>{t('loadLabels.onlyOneLabel')}</p>
             </>;
         else
             return <>
@@ -103,16 +105,14 @@ const LoadLabelNamesPopup: React.FC<IProps> = (
                     alt={'uploaded'}
                     src={'ico/box-closed.png'}
                 />
-                <p className='extraBold'>{labelsList.length} labels found</p>
+                <p className='extraBold'>{t('loadLabels.labelsFound', { count: labelsList.length })}</p>
             </>;
     };
 
     const renderContent = () => {
         return (<div className='LoadLabelsPopupContent'>
             <div className='Message'>
-                Load a text file with a list of labels you are planning to use. The names of
-                each label should be separated by new line. If you don&apos;t have a prepared file, no problem. You can
-                create your own list now.
+                {t('loadLabels.message')}
             </div>
             <div {...getRootProps({ className: 'DropZone' })}>
                 {getDropZoneContent()}
@@ -122,12 +122,12 @@ const LoadLabelNamesPopup: React.FC<IProps> = (
 
     return (
         <GenericYesNoPopup
-            title={'Load file with labels description'}
+            title={t('loadLabels.title')}
             renderContent={renderContent}
-            acceptLabel={'Start project'}
+            acceptLabel={t('loadLabels.startProject')}
             onAccept={onAccept}
             disableAcceptButton={labelsList.length === 0}
-            rejectLabel={'Back'}
+            rejectLabel={t('loadLabels.back')}
             onReject={onReject}
         />
     );

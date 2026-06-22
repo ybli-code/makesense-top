@@ -13,6 +13,7 @@ import {LabelsSelector} from '../../../store/selectors/LabelsSelector';
 import { v4 as uuidv4 } from 'uuid';
 import {ArrayUtil} from '../../../utils/ArrayUtil';
 import {Settings} from '../../../settings/Settings';
+import { useTranslation } from 'react-i18next';
 
 interface SelectableName {
     name: string;
@@ -31,6 +32,7 @@ const SuggestLabelNamesPopup: React.FC<IProps> = (
         updateSuggestedLabelList,
         updateRejectedSuggestedLabelList
     }) => {
+    const { t } = useTranslation();
 
     const mapNamesToSelectableNames = (names: string[]): SelectableName[] => {
         return names.map((name: string) => {
@@ -150,8 +152,7 @@ const SuggestLabelNamesPopup: React.FC<IProps> = (
     const renderContent = () => {
         return(<div className='SuggestLabelNamesPopupContent'>
             <div className='Message'>
-                We found objects of classes that are not yet included in the list of labels. Select the names you
-                would like to add. This will help to speed up the labeling process.
+                {t('suggest.message')}
             </div>
             <div className='AllToggle'>
                 <div
@@ -169,7 +170,7 @@ const SuggestLabelNamesPopup: React.FC<IProps> = (
                             src={'ico/checkbox-unchecked.png'}
                             alt={'unchecked'}
                         />}
-                    {selectAllFlag ? 'Deselect all' : 'Select all'}
+                    {selectAllFlag ? t('suggest.deselectAll') : t('suggest.selectAll')}
                 </div>
             </div>
             <div className='LabelNamesContainer'>
@@ -186,11 +187,11 @@ const SuggestLabelNamesPopup: React.FC<IProps> = (
 
     return(
         <GenericYesNoPopup
-            title={'New classes found'}
+            title={t('suggest.newClassesFound')}
             renderContent={renderContent}
-            acceptLabel={'Accept'}
+            acceptLabel={t('suggest.accept')}
             onAccept={onAccept}
-            rejectLabel={'Reject'}
+            rejectLabel={t('suggest.reject')}
             onReject={onReject}
         />
     );

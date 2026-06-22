@@ -15,6 +15,13 @@
   flex-direction: row;
   flex-wrap: nowrap;
 
+  .LanguageSelectorWrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
   &.InProgress {
     .LeftColumn {
       width: 280px;

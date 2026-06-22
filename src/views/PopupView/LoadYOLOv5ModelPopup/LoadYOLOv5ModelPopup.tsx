@@ -21,6 +21,7 @@ import {NotificationUtil} from '../../../utils/NotificationUtil';
 import {NotificationsDataMap} from '../../../data/info/NotificationsData';
 import {Notification} from '../../../data/enums/Notification';
 import {CSSHelper} from '../../../logic/helpers/CSSHelper';
+import { useTranslation } from 'react-i18next';
 import {ClipLoader} from 'react-spinners';
 import {useDropzone} from 'react-dropzone';
 import {YOLOUtils} from '../../../logic/import/yolo/YOLOUtils';
@@ -43,20 +44,20 @@ interface IPretrainedModelSpecification {
     name: string
 }
 
-const PretrainedModelDataMap: Record<PretrainedModel, IPretrainedModelSpecification> = {
+const PretrainedModelDataMap: (t: (key: string) => string) => Record<PretrainedModel, IPretrainedModelSpecification> = (t) => ({
     [PretrainedModel.YOLO_V5_N_COCO]: {
         config: YOLO_V5_N_COCO_MODEL_CONFIG,
-        name: 'YOLOv5n / COCO'
+        name: t('model.yoloV5nCOCO')
     },
     [PretrainedModel.YOLO_V5_S_COCO]: {
         config: YOLO_V5_S_COCO_MODEL_CONFIG,
-        name: 'YOLOv5s / COCO'
+        name: t('model.yoloV5sCOCO')
     },
     [PretrainedModel.YOLO_V5_M_COCO]: {
         config: YOLO_V5_M_COCO_MODEL_CONFIG,
-        name: 'YOLOv5m / COCO'
+        name: t('model.yoloV5mCOCO')
     }
-}
+});
 
 interface IProps {
     updateActivePopupTypeAction: (activePopupType: PopupWindowType) => GeneralActionTypes;
@@ -64,6 +65,7 @@ interface IProps {
 }
 
 const LoadYOLOv5ModelPopup: React.FC<IProps> = ({ updateActivePopupTypeAction, submitNewNotificationAction }) => {
+    const { t } = useTranslation();
 
     // BUSINESS LOGIC
 
@@ -113,7 +115,7 @@ const LoadYOLOv5ModelPopup: React.FC<IProps> = ({ updateActivePopupTypeAction, s
         }
         setIsLoading(true)
         if (modelSource === ModelSource.DOWNLOAD) {
-            YOLOV5ObjectDetector.loadModel(PretrainedModelDataMap[selectedPretrainedModel].config, onSuccess, onFailure)
+            YOLOV5ObjectDetector.loadModel(PretrainedModelDataMap(t)[selectedPretrainedModel].config, onSuccess, onFailure)
         } else {
             const config = { source: modelFiles, classNames: classNames.map((className: LabelName) => className.name) }
             YOLOV5ObjectDetector.loadModel(config, onSuccess, onFailure)
@@ -156,7 +158,7 @@ const LoadYOLOv5ModelPopup: React.FC<IProps> = ({ updateActivePopupTypeAction, s
     }
 
     const getOptionsContent = () => {
-        return Object.entries(PretrainedModelDataMap).map(([key, value]) => {
+        return Object.entries(PretrainedModelDataMap(t)).map(([key, value]) => {
             return <div
                 className='options-item'
                 onClick={() => setSelectedPretrainedModel(key as PretrainedModel)}
@@ -185,10 +187,8 @@ const LoadYOLOv5ModelPopup: React.FC<IProps> = ({ updateActivePopupTypeAction, s
     }
 
     const renderMessage = () => {
-        const uploadMessage: string = 'Drag and drop your own YOLOv5 model converted to tensorflow.js format and ' +
-            'speed up annotation process. Make sure to upload all required files: model.json, model shards as well ' +
-            'as .txt containing list of detected classes names.'
-        const downloadMessage: string = 'Use one of ours pretrained YOLOv5 models to speed up annotation process.'
+        const uploadMessage: string = t('model.yoloUploadMessage')
+        const downloadMessage: string = t('model.yoloDownloadMessage')
         return(<div className='message'>
             {modelSource === ModelSource.DOWNLOAD ? downloadMessage : uploadMessage}
         </div>)
@@ -213,9 +213,9 @@ const LoadYOLOv5ModelPopup: React.FC<IProps> = ({ updateActivePopupTypeAction, s
                     alt={'upload'}
                     src={'ico/box-opened.png'}
                 />
-                <p className='extraBold'>Drop model files</p>
-                <p>or</p>
-                <p className='extraBold'>Click here to select them</p>
+                <p className='extraBold'>{t('model.dropModelFiles')}</p>
+                <p>{t('import.or')}</p>
+                <p className='extraBold'>{t('import.clickToSelect')}</p>
             </>;
         } else {
             return <>
@@ -225,8 +225,8 @@ const LoadYOLOv5ModelPopup: React.FC<IProps> = ({ updateActivePopupTypeAction, s
                     alt={'uploaded'}
                     src={'ico/box-closed.png'}
                 />
-                <p className='extraBold'>{modelFiles.length} model files</p>
-                <p className='extraBold'>{classNames.length} class names</p>
+                <p className='extraBold'>{t('model.modelFilesCount', { count: modelFiles.length })}</p>
+                <p className='extraBold'>{t('model.classNamesCount', { count: classNames.length })}</p>
             </>;
         }
 
@@ -257,12 +257,12 @@ const LoadYOLOv5ModelPopup: React.FC<IProps> = ({ updateActivePopupTypeAction, s
 
     return (
         <GenericYesNoPopup
-            title={'Load YOLOv5 model'}
+            title={t('model.loadYOLOv5')}
             renderContent={renderContent}
             disableAcceptButton={disableAcceptButton}
-            acceptLabel={'Use model!'}
+            acceptLabel={t('model.useModel')}
             onAccept={onAccept}
-            rejectLabel={'Back'}
+            rejectLabel={t('project.back')}
             onReject={onReject}
         />
     );

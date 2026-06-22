@@ -13,6 +13,7 @@ import {AppState} from '../../../store';
 import {connect} from 'react-redux';
 import {PopupWindowType} from '../../../data/enums/PopupWindowType';
 import {GeneralActionTypes} from '../../../store/general/types';
+import { useTranslation } from 'react-i18next';
 
 interface SelectableModel {
     model: AIModel,
@@ -20,20 +21,20 @@ interface SelectableModel {
     flag: boolean
 }
 
-const models: SelectableModel[] = [
+const models: (t: (key: string) => string) => SelectableModel[] = (t) => [
     {
         model: AIModel.YOLO_V5_OBJECT_DETECTION,
-        name: 'YOLOv5 - object detection using rectangles',
+        name: t('model.yoloV5Rect'),
         flag: false
     },
     {
         model: AIModel.SSD_OBJECT_DETECTION,
-        name: 'COCO SSD - object detection using rectangles',
+        name: t('model.cocoSSDRect'),
         flag: false
     },
     {
         model: AIModel.POSE_DETECTION,
-        name: 'POSE-NET - pose estimation using points',
+        name: t('model.poseNetPoint'),
         flag: false
     }
 ];
@@ -43,8 +44,9 @@ interface IProps {
 }
 
 const LoadModelPopup: React.FC<IProps> = ({ updateActivePopupType }) => {
+    const { t } = useTranslation();
     const [modelIsLoadingStatus, setModelIsLoadingStatus] = useState(false);
-    const [selectedModelToLoad, updateSelectedModelToLoad] = useState(models);
+    const [selectedModelToLoad, updateSelectedModelToLoad] = useState(models(t));
 
     const extractSelectedModel = (): AIModel => {
         const model: SelectableModel = findLast(selectedModelToLoad, { flag: true });
@@ -120,9 +122,7 @@ const LoadModelPopup: React.FC<IProps> = ({ updateActivePopupType }) => {
     const renderContent = () => {
         return <div className='LoadModelPopupContent'>
             <div className='Message'>
-                Speed up your annotation process using AI. Don't worry, your photos are still safe. To take care of
-                your privacy, we decided not to send your images to the server, but instead bring AI to you. Make sure
-                that you have a fast and stable connection - it may take a while to load the model.
+                {t('model.aiMessage')}
             </div>
             <div className='Companion'>
                 {modelIsLoadingStatus ?
@@ -141,12 +141,12 @@ const LoadModelPopup: React.FC<IProps> = ({ updateActivePopupType }) => {
 
     return (
         <GenericYesNoPopup
-            title={'Say hello to AI'}
+            title={t('model.sayHelloToAI')}
             renderContent={renderContent}
-            acceptLabel={'Use model!'}
+            acceptLabel={t('model.useModel')}
             onAccept={onAccept}
             disableAcceptButton={modelIsLoadingStatus || !extractSelectedModel()}
-            rejectLabel={"I'm going on my own"}
+            rejectLabel={t('model.goMyOwn')}
             onReject={onReject}
             disableRejectButton={modelIsLoadingStatus}
         />

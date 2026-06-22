@@ -5,6 +5,7 @@ import App from './App';
 import configureStore from './configureStore';
 import { Provider } from 'react-redux';
 import { AppInitializer } from './logic/initializer/AppInitializer';
+import './i18n/config';
 
 export const store = configureStore();
 AppInitializer.inti();

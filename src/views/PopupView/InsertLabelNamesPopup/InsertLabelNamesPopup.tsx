@@ -3,6 +3,7 @@ import './InsertLabelNamesPopup.scss';
 import { GenericYesNoPopup } from '../GenericYesNoPopup/GenericYesNoPopup';
 import { PopupWindowType } from '../../../data/enums/PopupWindowType';
 import { updateLabelNames } from '../../../store/labels/actionCreators';
+import { useTranslation } from 'react-i18next';
 import { updateActivePopupType, updatePerClassColorationStatus } from '../../../store/general/actionCreators';
 import { AppState } from '../../../store';
 import { connect } from 'react-redux';

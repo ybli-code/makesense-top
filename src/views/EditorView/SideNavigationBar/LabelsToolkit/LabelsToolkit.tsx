@@ -19,6 +19,7 @@ import {ContextType} from "../../../../data/enums/ContextType";
 import {EventType} from "../../../../data/enums/EventType";
 import LineLabelsList from "../LineLabelsList/LineLabelsList";
 import TagLabelsList from "../TagLabelsList/TagLabelsList";
+import { withTranslation, WithTranslation } from "react-i18next";
 
 interface IProps {
     activeImageIndex:number,
@@ -34,7 +35,7 @@ interface IState {
     size: ISize;
 }
 
-class LabelsToolkit extends React.Component<IProps, IState> {
+class LabelsToolkit extends React.Component<IProps & WithTranslation, IState> {
     private labelsToolkitRef: HTMLDivElement;
     private readonly tabs: LabelType[];
 
@@ -205,4 +206,4 @@ const mapStateToProps = (state: AppState) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LabelsToolkit);
+)(withTranslation()(LabelsToolkit));
