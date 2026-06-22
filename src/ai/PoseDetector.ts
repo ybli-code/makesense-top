@@ -35,7 +35,7 @@ export class PoseDetector {
                     callback();
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 // TODO: Introduce central logging system like Sentry
                 store.dispatch(
                     submitNewNotification(
@@ -57,7 +57,7 @@ export class PoseDetector {
                     callback(predictions)
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 // TODO: Introduce central logging system like Sentry
                 store.dispatch(
                     submitNewNotification(

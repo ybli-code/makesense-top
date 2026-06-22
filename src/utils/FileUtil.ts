@@ -32,8 +32,13 @@ export class FileUtil {
     public static readFile(fileData: File): Promise<string> {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onloadend = (event: any) => {
-                resolve(event?.target?.result);
+            reader.onloadend = (event: ProgressEvent<FileReader>) => {
+                const result = event.target?.result;
+                if (typeof result === 'string') {
+                    resolve(result);
+                    return;
+                }
+                reject(new Error('Unable to read file content as text.'));
             };
             reader.onerror = reject;
             reader.readAsText(fileData);
