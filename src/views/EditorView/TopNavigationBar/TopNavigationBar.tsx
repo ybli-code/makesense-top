@@ -58,6 +58,21 @@ const TopNavigationBar: React.FC<IProps> = (props) => {
                 <div className='NavigationBarGroupWrapper'>
                     <DropDownMenu/>
                 </div>
+                <div className='NavigationBarGroupWrapper'>
+                    <a
+                        className='DatasetMarketLink'
+                        href='https://data2.cn'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                    >
+                        <img
+                            draggable={false}
+                            src='ico/documentation.png'
+                            alt='dataset-market'
+                        />
+                        <span>{t('nav.datasetMarketEditor')}</span>
+                    </a>
+                </div>
                 <div className='NavigationBarGroupWrapper middle'>
                     <div className='ProjectName'>{t('editor.projectName')}:</div>
                     <TextInput

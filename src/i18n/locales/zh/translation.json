@@ -216,6 +216,10 @@
         "chinese": "中文",
         "english": "English"
     },
+    "nav": {
+        "datasetMarket": "成品数据集",
+        "datasetMarketEditor": "数据集市场"
+    },
     "dropzone": {
         "dropImages": "拖放图片到此处",
         "orClickToUpload": "或点击上传图片",

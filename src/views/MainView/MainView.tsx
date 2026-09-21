@@ -94,6 +94,14 @@ const MainView: React.FC = () => {
     return (
         <div className={getClassName()}>
             <div className='LanguageSelectorWrapper'>
+                <a
+                    className='DatasetMarketButton'
+                    href='https://data2.cn'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >
+                    <span className='dataset-market-text'>{t('nav.datasetMarket')}</span>
+                </a>
                 <LanguageSelector />
             </div>
             <div className='Slider' id='lower'>

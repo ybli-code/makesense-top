@@ -216,6 +216,10 @@
         "chinese": "中文",
         "english": "English"
     },
+    "nav": {
+        "datasetMarket": "Datasets",
+        "datasetMarketEditor": "Dataset Market"
+    },
     "dropzone": {
         "dropImages": "Drop images here",
         "orClickToUpload": "or click to upload",

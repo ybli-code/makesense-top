@@ -68,29 +68,5 @@ export const getDropDownMenuData = (): DropDownMenuNode[] => [
                 onClick: () => store.dispatch(updateActivePopupType(PopupWindowType.CONNECT_AI_MODEL_VIA_API))
             },
         ]
-    },
-    {
-        nameKey: 'editor.community',
-        imageSrc: 'ico/plant.png',
-        imageAlt: 'community',
-        disabled: false,
-        children: [
-            {
-                nameKey: 'editor.documentation',
-                descriptionKey: 'editor.documentationDescription',
-                imageSrc: 'ico/documentation.png',
-                imageAlt: 'documentation',
-                disabled: false,
-                onClick: () => window.open('https://skalskip.github.io/make-sense', '_blank')
-            },
-            {
-                nameKey: 'editor.bugsAndFeatures',
-                descriptionKey: 'editor.bugsAndFeaturesDescription',
-                imageSrc: 'ico/bug.png',
-                imageAlt: 'bug',
-                disabled: false,
-                onClick: () => window.open('https://github.com/SkalskiP/make-sense/issues', '_blank')
-            }
-        ]
     }
 ]

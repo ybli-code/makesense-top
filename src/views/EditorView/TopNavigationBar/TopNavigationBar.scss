@@ -123,5 +123,34 @@
     .DropDownMenuWrapper {
       align-self: stretch;
     }
+
+    .DatasetMarketLink {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      padding: 0 10px;
+      border-radius: 3px;
+      align-self: stretch;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.3s ease-in-out;
+      text-decoration: none;
+      color: white;
+
+      img {
+        width: 15px;
+        height: 15px;
+        margin-right: 10px;
+        user-select: none;
+        filter: brightness(0) invert(1);
+      }
+
+      &:hover {
+        border-radius: 3px;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
   }
 }
