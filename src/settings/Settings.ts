@@ -1,10 +1,10 @@
 import {PopupWindowType} from '../data/enums/PopupWindowType';
 
 export class Settings {
-    public static readonly GITHUB_URL: string = 'https://github.com/li-yibing';
-    public static readonly MEDIUM_URL: string = 'https://medium.com/@piotr.skalski92';
-    public static readonly TWITCH_URL: string = 'https://www.twitch.tv/skalskip';
-    public static readonly YOUTUBE_URL: string = 'https://www.youtube.com/watch?v=AWjKfjDGiYE';
+    public static readonly GITHUB_URL: string = 'https://github.com/ybli-code/makesense-top';
+    public static readonly DATASET_URL: string = 'https://www.data2.cn';
+    public static readonly BILIBILI_URL: string = 'https://b23.tv/I9wrATK';
+    public static readonly XIAOHONGSHU_URL: string = 'https://xhslink.cn/o/6Zs3BBZSXao';
 
     public static readonly TOP_NAVIGATION_BAR_HEIGHT_PX: number = 35;
     public static readonly EDITOR_BOTTOM_NAVIGATION_BAR_HEIGHT_PX: number = 40 + 1;
