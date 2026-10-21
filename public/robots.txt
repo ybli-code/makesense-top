@@ -1,0 +1,7 @@
+# robots.txt for makesense.top
+# 全站允许抓取
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.makesense.top/sitemap.xml
